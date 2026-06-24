@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NOXR · luxury perfume oils</title>
+  <!-- Google Fonts: Cormorant Garamond + Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500&display=swap" rel="stylesheet" />
+  <style>
+    /* reset & base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #050505;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* typography */
+    h1, h2, h3, h4, .heading-font {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .gold-accent {
+      color: #C6A56B;
+    }
+
+    .text-secondary {
+      color: #BDBDBD;
+    }
+
+    /* ----- navigation ----- */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 0 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 600;
+      letter-spacing: 4px;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.8rem;
+      font-size: 0.95rem;
+      font-weight: 400;
+      letter-spacing: 0.3px;
+      color: #BDBDBD;
+    }
+
+    .nav-links a {
+      color: #BDBDBD;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 1.8rem;
+      align-items: center;
+    }
+
+    .nav-actions span {
+      font-size: 1.2rem;
+      color: #BDBDBD;
+      cursor: default;
+    }
+
+    /* ----- hero ----- */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 3.5rem 0 5rem;
+      position: relative;
+    }
+
+    .hero-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 8rem;
+      font-weight: 600;
+      letter-spacing: 12px;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(180deg, #ffffff 20%, #b0b0b0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: 400;
+      letter-spacing: 6px;
+      margin-top: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero .subhead {
+      font-size: 1.15rem;
+      font-weight: 300;
+      color: #BDBDBD;
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+      letter-spacing: 0.4px;
+    }
+
+    /* floating bottle + smoke simulation (css only) */
+    .hero-image {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      margin: 1.5rem auto 2.8rem;
+      aspect-ratio: 1 / 1.1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .bottle-wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .bottle {
+      width: 70%;
+      height: 80%;
+      background: radial-gradient(circle at 30% 25%, #3d3d3d, #0a0a0a 80%);
+      border-radius: 40% 40% 30% 30% / 60% 60% 20% 20%;
+      box-shadow: 0 20px 60px rgba(198, 165, 107, 0.15), 0 0 0 1px rgba(198, 165, 107, 0.08);
+      position: relative;
+      animation: float 5s ease-in-out infinite;
+      transform-style: preserve-3d;
+    }
+
+    .bottle::before {
+      content: '';
+      position: absolute;
+      top: -8%;
+      left: 25%;
+      width: 50%;
+      height: 12%;
+      background: #1a1a1a;
+      border-radius: 40% 40% 10% 10% / 30% 30% 10% 10%;
+      box-shadow: inset 0 -2px 6px rgba(0,0,0,0.6);
+    }
+
+    .bottle::after {
+      content: 'NOXR';
+      position: absolute;
+      bottom: 25%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      letter-spacing: 6px;
+      color: rgba(198, 165, 107, 0.3);
+      font-weight: 400;
+    }
+
+    /* soft smoke / glow */
+    .smoke {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(36px);
+      opacity: 0.2;
+      pointer-events: none;
+      animation: smokeDrift 8s infinite alternate ease-in-out;
+    }
+
+    .smoke-1 {
+      width: 200px;
+      height: 200px;
+      background: #C6A56B;
+      top: -30px;
+      left: -30px;
+      animation-delay: 0s;
+    }
+
+    .smoke-2 {
+      width: 160px;
+      height: 160px;
+      background: #b8a07c;
+      bottom: -20px;
+      right: -20px;
+      animation-delay: 2s;
+    }
+
+    .smoke-3 {
+      width: 120px;
+      height: 120px;
+      background: #a08962;
+      top: 40%;
+      left: 40%;
+      animation-delay: 4s;
+      opacity: 0.12;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(-1deg); }
+      50% { transform: translateY(-16px) rotate(1deg); }
+      100% { transform: translateY(0) rotate(-1deg); }
+    }
+
+    @keyframes smokeDrift {
+      0% { transform: translate(0, 0) scale(1); opacity: 0.15; }
+      100% { transform: translate(20px, -20px) scale(1.2); opacity: 0.25; }
+    }
+
+    .btn-gold {
+      display: inline-block;
+      background: transparent;
+      border: 1px solid #C6A56B;
+      color: #fff;
+      padding: 0.9rem 2.8rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s;
+      margin-top: 0.25rem;
+    }
+
+    .btn-gold:hover {
+      background: #C6A56B;
+      color: #050505;
+      border-color: #C6A56B;
+    }
+
+    /* ----- section common ----- */
+    .section-title {
+      font-size: 2.4rem;
+      font-weight: 400;
+      letter-spacing: 3px;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-sub {
+      font-weight: 300;
+      color: #BDBDBD;
+      margin-bottom: 2.5rem;
+    }
+
+    /* collections cards */
+    .collection-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.8rem;
+      margin: 3rem 0 4rem;
+    }
+
+    .collection-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.04);
+      padding: 2rem 1.8rem 2.2rem;
+      transition: border-color 0.2s;
+    }
+
+    .collection-card:hover {
+      border-color: rgba(198, 165, 107, 0.25);
+    }
+
+    .collection-card .number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: #C6A56B;
+      letter-spacing: 2px;
+      opacity: 0.7;
+    }
+
+    .collection-card h3 {
+      font-size: 1.8rem;
+      font-weight: 400;
+      margin: 0.5rem 0 0.2rem;
+    }
+
+    .collection-card .price {
+      font-size: 0.95rem;
+      color: #BDBDBD;
+      margin: 0.25rem 0 0.5rem;
+      font-weight: 300;
+    }
+
+    .collection-card .desc {
+      font-size: 0.9rem;
+      color: #BDBDBD;
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    .collection-card .badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #C6A56B;
+      border: 1px solid rgba(198, 165, 107, 0.2);
+      padding: 0.2rem 0.8rem;
+      margin-top: 0.8rem;
+    }
+
+    .badge-premium {
+      border-color: #C6A56B;
+      color: #C6A56B;
+    }
+
+    /* best sellers */
+    .bestseller-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.8rem;
+      margin: 2rem 0 3rem;
+    }
+
+    .product-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.04);
+      padding: 1.5rem 1.2rem 1.8rem;
+      text-align: center;
+    }
+
+    .product-card .product-image {
+      width: 100%;
+      aspect-ratio: 1 / 1.2;
+      background: radial-gradient(circle at 30% 20%, #2a2a2a, #0a0a0a 80%);
+      border-radius: 20px;
+      margin-bottom: 1.2rem;
+      position: relative;
+    }
+
+    .product-card .product-image::after {
+      content: '✦';
+      position: absolute;
+      bottom: 12px;
+      right: 16px;
+      color: #C6A56B;
+      font-size: 1.4rem;
+      opacity: 0.4;
+    }
+
+    .product-card h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      letter-spacing: 1px;
+    }
+
+    .product-card .product-price {
+      color: #BDBDBD;
+      font-weight: 300;
+      font-size: 0.9rem;
+      margin-top: 0.2rem;
+    }
+
+    /* craftsmanship */
+    .craftsmanship {
+      margin: 5rem 0;
+      background: linear-gradient(145deg, #0b0b0b, #050505);
+      padding: 4rem 2rem;
+      border-top: 1px solid rgba(198, 165, 107, 0.06);
+      border-bottom: 1px solid rgba(198, 165, 107, 0.06);
+      text-align: center;
+    }
+
+    .craftsmanship h2 {
+      font-size: 4rem;
+      font-weight: 400;
+      letter-spacing: 10px;
+      color: #fff;
+    }
+
+    .craftsmanship p {
+      color: #BDBDBD;
+      max-width: 480px;
+      margin: 0.5rem auto 0;
+      font-weight: 300;
+      letter-spacing: 0.6px;
+    }
+
+    /* reviews */
+    .reviews {
+      margin: 4rem 0 5rem;
+    }
+
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.8rem;
+      margin-top: 1.5rem;
+    }
+
+    .review-item {
+      background: rgba(255,255,255,0.02);
+      padding: 1.8rem 1.5rem;
+      border-left: 1px solid rgba(198, 165, 107, 0.08);
+    }
+
+    .review-item .stars {
+      color: #C6A56B;
+      letter-spacing: 2px;
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .review-item blockquote {
+      font-weight: 300;
+      color: #e0e0e0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    .review-item .author {
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: #BDBDBD;
+      letter-spacing: 0.5px;
+    }
+
+    /* product page sample (minimal) */
+    .product-sample {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin: 4rem 0 2rem;
+      padding: 2rem 0;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .product-sample .sample-image {
+      background: radial-gradient(circle at 30% 20%, #2a2a2a, #0a0a0a 80%);
+      border-radius: 30px;
+      aspect-ratio: 1 / 1.1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(198, 165, 107, 0.15);
+      font-size: 3rem;
+      font-family: 'Cormorant Garamond', serif;
+      letter-spacing: 8px;
+    }
+
+    .product-sample .sample-details h3 {
+      font-size: 2.4rem;
+      font-weight: 400;
+      letter-spacing: 2px;
+    }
+
+    .product-sample .sample-details .notes {
+      color: #BDBDBD;
+      margin: 0.5rem 0 0.25rem;
+      font-weight: 300;
+    }
+
+    .product-sample .sample-details .meta {
+      color: #BDBDBD;
+      font-size: 0.9rem;
+      margin: 0.2rem 0 1.5rem;
+      font-weight: 300;
+    }
+
+    .btn-add {
+      background: transparent;
+      border: 1px solid #C6A56B;
+      color: #fff;
+      padding: 0.8rem 2.8rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-top: 0.5rem;
+    }
+
+    .btn-add:hover {
+      background: #C6A56B;
+      color: #050505;
+    }
+
+    /* footer */
+    .footer {
+      border-top: 1px solid rgba(255,255,255,0.04);
+      padding: 2.5rem 0 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      color: #5a5a5a;
+      font-size: 0.8rem;
+      letter-spacing: 0.4px;
+      font-weight: 300;
+    }
+
+    /* responsive */
+    @media (max-width: 900px) {
+      .collection-grid, .bestseller-grid, .review-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .product-sample {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      .nav-links {
+        gap: 1.2rem;
+        font-size: 0.8rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .collection-grid, .bestseller-grid, .review-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-logo {
+        font-size: 4.5rem;
+        letter-spacing: 6px;
+      }
+      .hero h1 {
+        font-size: 2.2rem;
+        letter-spacing: 4px;
+      }
+      .navbar {
+        flex-wrap: wrap;
+        gap: 0.8rem;
+      }
+      .nav-links {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        gap: 1.4rem;
+      }
+      .craftsmanship h2 {
+        font-size: 2.6rem;
+        letter-spacing: 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <!-- navigation -->
+  <nav class="navbar">
+    <a href="#" class="nav-logo">NOXR</a>
+    <div class="nav-links">
+      <a href="#">Classic</a>
+      <a href="#">Signature</a>
+      <a href="#">Inspired</a>
+      <a href="#">About</a>
+    </div>
+    <div class="nav-actions">
+      <span>🔍</span>
+      <span>👤</span>
+      <span>🛒</span>
+    </div>
+  </nav>
+
+  <!-- hero -->
+  <section class="hero">
+    <div class="hero-logo">NOXR</div>
+    <h1>EVERY MEMORY HAS A SCENT</h1>
+    <p class="subhead">Luxury perfume oils crafted to capture moments, memories and emotions.</p>
+
+    <div class="hero-image">
+      <div class="bottle-wrapper">
+        <div class="bottle"></div>
+        <div class="smoke smoke-1"></div>
+        <div class="smoke smoke-2"></div>
+        <div class="smoke smoke-3"></div>
+      </div>
+    </div>
+
+    <a href="#" class="btn-gold">Explore Collection</a>
+  </section>
+
+  <!-- collections -->
+  <section>
+    <h2 class="section-title">Collections</h2>
+    <div class="collection-grid">
+      <div class="collection-card">
+        <div class="number">01</div>
+        <h3>Classic</h3>
+        <div class="price">₹999 – ₹1,999</div>
+        <div class="desc">Everyday luxury. Clean, versatile fragrances for every occasion.</div>
+        <span class="badge">entry luxury</span>
+      </div>
+      <div class="collection-card">
+        <div class="number">02</div>
+        <h3>Signature</h3>
+        <div class="price">₹2,499 – ₹4,999</div>
+        <div class="desc">Rare ingredients. Deeper character. Longer lasting compositions.</div>
+        <span class="badge badge-premium">premium · focus</span>
+      </div>
+      <div class="collection-card">
+        <div class="number">03</div>
+        <h3>Inspired</h3>
+        <div class="price">—</div>
+        <div class="desc">Inspired by globally celebrated fragrances, reimagined with NOXR craftsmanship.</div>
+        <span class="badge">icon series</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- best sellers -->
+  <section>
+    <h2 class="section-title">Best Sellers</h2>
+    <div class="bestseller-grid">
+      <div class="product-card">
+        <div class="product-image"></div>
+        <h4>Oud Noir</h4>
+        <div class="product-price">₹3,200</div>
+      </div>
+      <div class="product-card">
+        <div class="product-image"></div>
+        <h4>Musk Amber</h4>
+        <div class="product-price">₹2,150</div>
+      </div>
+      <div class="product-card">
+        <div class="product-image"></div>
+        <h4>Santal Royal</h4>
+        <div class="product-price">₹2,890</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- craftsmanship -->
+  <section class="craftsmanship">
+    <h2>Crafted to be remembered.</h2>
+    <p>Full-screen image · each drop tells a story of patience and precision.</p>
+  </section>
+
+  <!-- reviews -->
+  <section class="reviews">
+    <h2 class="section-title">Reviews</h2>
+    <div class="review-grid">
+      <div class="review-item">
+        <div class="stars">✦ ✦ ✦ ✦ ✦</div>
+        <blockquote>“The depth of Signature is extraordinary. It lasts all day.”</blockquote>
+        <div class="author">— A. Sharma</div>
+      </div>
+      <div class="review-item">
+        <div class="stars">✦ ✦ ✦ ✦ ✦</div>
+        <blockquote>“Classic collection is my daily ritual. Clean, elegant.”</blockquote>
+        <div class="author">— M. Kapoor</div>
+      </div>
+      <div class="review-item">
+        <div class="stars">✦ ✦ ✦ ✦ ✦</div>
+        <blockquote>“Inspired series is a masterpiece. So close to the originals.”</blockquote>
+        <div class="author">— R. Singh</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- product page minimal sample -->
+  <section class="product-sample">
+    <div class="sample-image">NOXR</div>
+    <div class="sample-details">
+      <h3>Oud Noir</h3>
+      <div class="notes">Notes: Agarwood · Saffron · Amber</div>
+      <div class="meta">Longevity: 8+ hours · Size: 15ml</div>
+      <div class="meta" style="color: #C6A56B;">₹3,200</div>
+      <button class="btn-add">Add to Cart</button>
+    </div>
+  </section>
+
+  <!-- footer -->
+  <footer class="footer">
+    <span>© NOXR 2026</span>
+    <span>Luxury perfume oils · crafted in India</span>
+  </footer>
+</div>
+<!-- end container -->
+</body>
+</html>
